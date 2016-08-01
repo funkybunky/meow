@@ -11,5 +11,5 @@ export default createContainer(() => {
   return {
     meteorData: 'goes here',
     createGroup,
-  }
-}, Thing)
+  };
+}, Thing);
