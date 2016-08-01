@@ -1,1 +1,1 @@
-import '../../collections/entries';
+import '../../collections/groups';
