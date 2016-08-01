@@ -13,23 +13,26 @@ class Thing extends Component {
   };
 
   render() {
-    return <div style={styles.root}>
-      <div>
-        <button
-          style={styles.button}
-          onClick={this.showProps}>
-          Dump props
-        </button>
+    return (
+      <div style={styles.root}>
+        <div>
+          <button
+            style={styles.button}
+            onClick={this.showProps}
+          >
+            Dump props
+          </button>
+        </div>
+        <div>
+          <button
+            style={styles.button}
+            onClick={this.callMethod}
+          >
+            Call Meteor method
+          </button>
+        </div>
       </div>
-      <div>
-        <button
-          style={styles.button}
-          onClick={this.callMethod}
-        >
-          Call Meteor method
-        </button>
-      </div>
-    </div>
+    );
   }
 }
 
@@ -44,6 +47,10 @@ const styles = {
   },
 };
 
-Thing.propTypes = {};
+Thing.propTypes = {
+  ready: React.PropTypes.bool.isRequired,
+  createGroup: React.PropTypes.object.isRequired,
+  groups: React.PropTypes.array.isRequired,
+};
 
-export default Radium(Thing)
+export default Radium(Thing);
