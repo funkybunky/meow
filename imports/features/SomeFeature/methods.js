@@ -1,3 +1,4 @@
+import { Groups } from '/imports/collections/groups';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 

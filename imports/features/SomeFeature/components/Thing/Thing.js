@@ -4,7 +4,7 @@ import Radium from 'radium';
 class Thing extends Component {
   callMethod = () => {
     this.props.createGroup({ name: 'Unknown' }, (error, result) => {
-      console.log(result);
+      console.log(error, result);
     });
   };
 
@@ -49,7 +49,7 @@ const styles = {
 
 Thing.propTypes = {
   ready: React.PropTypes.bool.isRequired,
-  createGroup: React.PropTypes.object.isRequired,
+  createGroup: React.PropTypes.func.isRequired,
   groups: React.PropTypes.array.isRequired,
 };
 

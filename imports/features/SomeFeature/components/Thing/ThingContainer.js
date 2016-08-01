@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Groups } from '/imports/collections/groups';
 import { createContainer } from 'meteor/react-meteor-data';
 import { createGroup as _createGroup } from '../../methods';
 
