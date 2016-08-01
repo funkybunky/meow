@@ -3,7 +3,7 @@ import { Class } from 'meteor/jagi:astronomy';
 
 import { globalizeData } from '../helpers';
 
-export const Groups = new Mongo.Collection('groups');
+export const Groups = new Mongo.Collection('Groups');
 
 export const Group = Class.create({
   name: 'Entry',
