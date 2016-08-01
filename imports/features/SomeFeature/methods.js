@@ -1,8 +1,8 @@
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-export const someMethod = new ValidatedMethod({
-  name: 'someMethod',
+export const createGroup = new ValidatedMethod({
+  name: 'createGroup',
 
   validate(args) {
     check(args, {

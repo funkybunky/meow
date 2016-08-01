@@ -3,7 +3,7 @@ import Radium from 'radium';
 
 class Thing extends Component {
   callMethod = () => {
-    this.props.someMethod({ name: 'Unknown' }, (error, result) => {
+    this.props.createGroup({ name: 'Unknown' }, (error, result) => {
       console.log(result);
     });
   };
