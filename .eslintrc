@@ -68,7 +68,8 @@
       "allowBlockStart": true,
       "allowObjectStart": true
     }],
-    "max-len": [1, 80, 2, {"ignoreUrls": true}],
+    # "max-len": [1, 80, 2, {"ignoreUrls": true}],
+    "max-len": [1, 100, 2, {"ignoreUrls": true}],
     "newline-after-var": 0,
     "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
     "no-multiple-empty-lines": [2, {"max": 1}],
