@@ -1,51 +1,62 @@
+/* global Meteor */
+// import Meteor from 'meteor/meteor';
+// We must NOT import Meteor, otherwise loginWithPassword is undefined!
 import React from 'react';
-import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { handleLogin } from '../../modules/login';
+import { Bert } from 'meteor/themeteorchef:bert';
+import Form from 'react-jsonschema-form';
+
+const schema = {
+  title: 'User',
+  type: 'object',
+  required: ['name', 'email', 'password'],
+  properties: {
+    name: { type: 'string', title: 'Name', default: 'Jackson' },
+    email: { type: 'string', title: 'Email', default: 'jackson@dude.com' },
+    password: { type: 'string', title: 'Password' },
+    // done: { type: 'boolean', title: 'Done?', default: false },
+  },
+};
+
+const uiSchema = {
+  password: {
+    'ui-widget': 'password',
+  },
+};
+
+const log = (type) => console.log.bind(console, type);
 
 export class Login extends React.Component {
-  componentDidMount() {
-    handleLogin({ component: this });
+
+  handleSubmit({ formData }) {
+    console.log('data: ', formData);
+    const { email, password } = formData;
+    Meteor.loginWithPassword(email, password, (error) => {
+      if (error) {
+        console.log('bla!', error);
+        Bert.alert(error.reason, 'warning');
+      } else {
+        console.log('success');
+        Bert.alert('Logged in!', 'success');
+
+        // const { location } = component.props;
+        // if (location.state && location.state.nextPathname) {
+        //   browserHistory.push(location.state.nextPathname);
+        // } else {
+        //   browserHistory.push('/');
+        // }
+      }
+    });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  // render() {
-  //   return (
-  //     <div>Hello</div>
-  //   );
-  // }
   render() {
-    return (<Row>test
-      <Col xs={12} sm={6} md={4}>
-        <h4 className="page-header">Login</h4>
-        <form ref="login" className="login" onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
-              type="email"
-              ref="emailAddress"
-              name="emailAddress"
-              placeholder="Email Address"
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>
-              <span className="pull-left">Password</span>
-              <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
-            </ControlLabel>
-            <FormControl
-              type="password"
-              ref="password"
-              name="password"
-              placeholder="Password"
-            />
-          </FormGroup>
-          <Button type="submit" bsStyle="success">Login</Button>
-        </form>
-      </Col>
-    </Row>);
+    return (
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        onChange={log('changed')}
+        onSubmit={this.handleSubmit}
+        onError={log('errors')}
+      />
+    );
   }
 }
