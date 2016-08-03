@@ -4,6 +4,7 @@
 import React from 'react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Form from 'react-jsonschema-form';
+import { browserHistory } from 'react-router';
 
 const schema = {
   title: 'User',
@@ -34,6 +35,7 @@ export class Login extends React.Component {
       if (error) {
         console.log('bla!', error);
         Bert.alert(error.reason, 'warning');
+        console.log('forgot the password? not signed up, yet?');
       } else {
         console.log('success');
         Bert.alert('Logged in!', 'success');
