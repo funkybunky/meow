@@ -28,7 +28,7 @@ const log = (type) => console.log.bind(console, type);
 
 export class Login extends React.Component {
 
-  handleSubmit({ formData }) {
+  handleSubmit = ({ formData }) => {
     console.log('data: ', formData);
     const { email, password } = formData;
     Meteor.loginWithPassword(email, password, (error) => {
@@ -40,12 +40,12 @@ export class Login extends React.Component {
         console.log('success');
         Bert.alert('Logged in!', 'success');
 
-        // const { location } = this.props;
-        // if (location.state && location.state.nextPathname) {
-        //   browserHistory.push(location.state.nextPathname);
-        // } else {
-        //   browserHistory.push('/');
-        // }
+        const { location } = this.props;
+        if (location.state && location.state.nextPathname) {
+          browserHistory.push(location.state.nextPathname);
+        } else {
+          browserHistory.push('/');
+        }
       }
     });
   }
