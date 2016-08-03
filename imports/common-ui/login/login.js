@@ -97,6 +97,7 @@ export class Login extends React.Component {
             : 'Already signed in?'}
         </button>
         {this.state.message ? <div>{this.state.message}</div> : ' '}
+        {/* TODO: always show the forgot password link/message, not cinditionally */}
         {this.state.message
           ? <div>wrong password!
             <a href="/recover-password">forgot the password?</a>
