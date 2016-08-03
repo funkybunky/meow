@@ -31,3 +31,4 @@ accounts-password@1.2.12      # Needed to use loginWithPassword
 accounts-base@1.2.9
 practicalmeteor:mocha
 themeteorchef:bert
+webpack:webpack
