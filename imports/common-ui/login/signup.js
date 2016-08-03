@@ -26,7 +26,7 @@ const uiSchema = {
 
 const log = (type) => console.log.bind(console, type);
 
-export class Login extends React.Component {
+export class Signup extends React.Component {
 
   handleSubmit({ formData }) {
     console.log('data: ', formData);
@@ -43,15 +43,15 @@ export class Login extends React.Component {
   }
 
   render() {
-    return <div>Hello</div>;
-    // return (
-    //   <Form
-    //     schema={schema}
-    //     uiSchema={uiSchema}
-    //     onChange={log('changed')}
-    //     onSubmit={this.handleSubmit}
-    //     onError={log('errors')}
-    //   />
-    // );
+    // return <div>Hello</div>;
+    return (
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        onChange={log('changed')}
+        onSubmit={this.handleSubmit}
+        onError={log('errors')}
+      />
+    );
   }
 }
