@@ -1,68 +1,57 @@
+/* global Meteor */
+// import Meteor from 'meteor/meteor';
+// We must NOT import Meteor, otherwise loginWithPassword is undefined!
 import React from 'react';
-import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { handleSignup } from '../../modules/signup';
+import { Bert } from 'meteor/themeteorchef:bert';
+import Form from 'react-jsonschema-form';
+import { browserHistory } from 'react-router';
+import { Accounts } from 'meteor/accounts-base';
 
-export class Signup extends React.Component {
-  componentDidMount() {
-    handleSignup({ component: this });
-  }
+const schema = {
+  title: 'User',
+  type: 'object',
+  required: ['name', 'email', 'password'],
+  properties: {
+    name: { type: 'string', title: 'Name', default: 'Jackson' },
+    email: { type: 'string', title: 'Email', default: 'jackson@dude.com' },
+    password: { type: 'string', title: 'Password' },
+  },
+};
 
-  handleSubmit(event) {
-    event.preventDefault();
+const uiSchema = {
+  password: {
+    'ui-widget': 'password',
+  },
+};
+
+const log = (type) => console.log.bind(console, type);
+
+export class Login extends React.Component {
+
+  handleSubmit({ formData }) {
+    console.log('data: ', formData);
+
+    Accounts.createUser(formData, (error) => {
+      if (error) {
+        console.log('bla!', error);
+        Bert.alert(error.reason, 'danger');
+      } else {
+        browserHistory.push('/');
+        Bert.alert('Welcome!', 'success');
+      }
+    });
   }
 
   render() {
-    return <Row>
-      <Col xs={ 12 } sm={ 6 } md={ 4 }>
-        <h4 className="page-header">Sign Up</h4>
-        <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
-          <Row>
-            <Col xs={ 6 } sm={ 6 }>
-              <FormGroup>
-                <ControlLabel>First Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  ref="firstName"
-                  name="firstName"
-                  placeholder="First Name"
-                />
-              </FormGroup>
-            </Col>
-            <Col xs={ 6 } sm={ 6 }>
-              <FormGroup>
-                <ControlLabel>Last Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  ref="lastName"
-                  name="lastName"
-                  placeholder="Last Name"
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <FormGroup>
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
-              type="text"
-              ref="emailAddress"
-              name="emailAddress"
-              placeholder="Email Address"
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              type="password"
-              ref="password"
-              name="password"
-              placeholder="Password"
-            />
-          </FormGroup>
-          <Button type="submit" bsStyle="success">Sign Up</Button>
-        </form>
-        <p>Already have an account? <Link to="/login">Log In</Link>.</p>
-      </Col>
-    </Row>;
+    return <div>Hello</div>;
+    // return (
+    //   <Form
+    //     schema={schema}
+    //     uiSchema={uiSchema}
+    //     onChange={log('changed')}
+    //     onSubmit={this.handleSubmit}
+    //     onError={log('errors')}
+    //   />
+    // );
   }
 }

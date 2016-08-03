@@ -1,5 +1,7 @@
-import 'meteor/accounts-base';
-import 'meteor/accounts-password';
+// TODO: Do I need to import these?
+// import 'meteor/accounts-base';
+// import 'meteor/accounts-password';
+
 import { Bert } from 'meteor/themeteorchef:bert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
