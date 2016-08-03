@@ -20,7 +20,7 @@ const schema = {
 
 const uiSchema = {
   password: {
-    'ui-widget': 'password',
+    'ui:widget': 'password',
   },
 };
 
