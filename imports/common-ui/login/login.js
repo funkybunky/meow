@@ -38,7 +38,7 @@ export class Login extends React.Component {
         console.log('success');
         Bert.alert('Logged in!', 'success');
 
-        // const { location } = component.props;
+        // const { location } = this.props;
         // if (location.state && location.state.nextPathname) {
         //   browserHistory.push(location.state.nextPathname);
         // } else {
