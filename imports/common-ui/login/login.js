@@ -10,9 +10,9 @@ import { Accounts } from 'meteor/accounts-base';
 const schema = {
   title: 'User',
   type: 'object',
-  required: ['name', 'email', 'password'],
+  required: ['username', 'email', 'password'],
   properties: {
-    name: { type: 'string', title: 'Name', default: 'Jackson' },
+    username: { type: 'string', title: 'Username', default: 'Jackson' },
     email: { type: 'string', title: 'Email', default: 'jackson@dude.com' },
     password: { type: 'string', title: 'Password' },
     // done: { type: 'boolean', title: 'Done?', default: false },
@@ -39,7 +39,7 @@ export class Login extends React.Component {
   }
 
   handleSubmit = ({ formData }) => {
-    console.log('data: ', formData);
+    // console.log('handleSubmit formData: ', formData);
     const { email, password } = formData;
     if (this.state.isLogin) {
       Meteor.loginWithPassword(email, password, (error) => {

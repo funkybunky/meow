@@ -8,7 +8,7 @@ const handleLogout = () => Meteor.logout(() => browserHistory.push('/login'));
 
 const userName = () => {
   const user = Meteor.user();
-  debugger;
+  console.log('AuthenticatedNav - Meteor.user(): ', user);
   const name = user && user.profile ? user.profile.name : '';
   return user ? `${name.first} ${name.last}` : '';
 };

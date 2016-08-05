@@ -17,5 +17,10 @@ Accounts.onCreateUser((options, user) => {
    *
    * Reference: http://guide.meteor.com/accounts.html#dont-use-profile
    */
-  return { ...user, ...options.profile };
+  const returnUser = { ...user, ...options.profile };
+  console.log('onCreateUser hook. options: ',
+    JSON.stringify(options, null, 2), 'user: ',
+    JSON.stringify(user, null, 2), 'returning user obj: ',
+    JSON.stringify(returnUser, null, 2));
+  return returnUser;
 });
