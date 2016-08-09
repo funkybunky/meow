@@ -3,6 +3,7 @@
 // We must NOT import Meteor, otherwise loginWithPassword is undefined!
 import React from 'react';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Row, Col, Alert } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
 import { browserHistory } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
@@ -64,16 +65,25 @@ export class ResetPassword extends React.Component {
 
   render() {
     return (
-      <Form
-        schema={schema}
-        uiSchema={uiSchema}
-        onChange={log('changed')}
-        onSubmit={this.handleSubmit}
-        onError={log('errors')}
-        validate={this.validate}
-      >
-        <button type="submit">Recover Password</button>
-      </Form>
+      <Row>
+        <Col xs={12} sm={6} md={4}>
+          <h4 className="page-header">Reset Password</h4>
+          <Alert bsStyle="info">
+           To reset your password, enter a new one below. You will be logged in
+          with your new password.
+          </Alert>
+          <Form
+            schema={schema}
+            uiSchema={uiSchema}
+            onChange={log('changed')}
+            onSubmit={this.handleSubmit}
+            onError={log('errors')}
+            validate={this.validate}
+          >
+            <button type="submit">Recover Password</button>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
