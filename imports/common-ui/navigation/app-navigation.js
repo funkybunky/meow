@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { AuthenticatedNav } from '/imports/common-ui/navigation/AuthenticatedNav.js';
-import { PublicNav } from '/imports/common-ui/navigation/PublicNav.js';
+import { AuthenticatedNav } from 'imports/common-ui/navigation/AuthenticatedNav.js';
+import { PublicNav } from 'imports/common-ui/navigation/PublicNav.js';
 
 export default class AppNavigation extends React.Component {
   renderNavigation(user) {

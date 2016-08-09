@@ -25,7 +25,7 @@
 
 import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
-import AppNavigation from '/imports/common-ui/navigation/app-navigation';
+import AppNavigation from 'imports/common-ui/navigation/app-navigation';
 
 export default class MainLayout extends Component {
 
