@@ -3,13 +3,13 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
-import Thing from '/imports/features/SomeFeature/components/Thing';
+import Thing from 'imports/features/SomeFeature/components/Thing';
 
-import { Login } from '/imports/common-ui/login/login';
-import { NotFound } from '/imports/common-ui/login/not-found';
-import { RecoverPassword } from '/imports/common-ui/login/recoverPassword';
-import { ResetPassword } from '/imports/common-ui/login/resetPassword';
-import { Signup } from '/imports/common-ui/login/signup';
+import { Login } from 'imports/common-ui/login/login';
+import { NotFound } from 'imports/common-ui/login/not-found';
+import { RecoverPassword } from 'imports/common-ui/login/recoverPassword';
+import { ResetPassword } from 'imports/common-ui/login/resetPassword';
+import { Signup } from 'imports/common-ui/login/signup';
 
 // import { FlowRouter } from 'meteor/kadira:flow-router';
 // import { mount } from 'react-mounter';

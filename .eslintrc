@@ -125,10 +125,22 @@
     "no-undef": 1
     // Prevent misspellings. This is really important!
   },
+  //"settings": {
+  //  "import/resolver": "meteor",
+  //  "flowtype": {
+  //    "onlyFilesWithFlowAnnotation": true
+  //  }
+  //}
   "settings": {
-    "import/resolver": "meteor",
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
+    "import/resolver": {
+      "meteor": {
+        "extensions": [".js", ".jsx", ".es6" ],
+        "paths": [ "/usr/local/share/global_modules" ],
+        "moduleDirectory": [ "node_modules", "/" ]
+        // The "/" allows to avoid the trailing slash. This is needed to let
+        // eslint have the same absolute path resolving mechanism than webpack
+        // https://www.npmjs.com/package/eslint-import-resolver-meteor
+        }
+      }
     }
-  }
 }

@@ -1,6 +1,6 @@
 // import React, { PropTypes } from 'react';
 // import { Provider } from 'react-redux';
-// import store from '/imports/redux/store';
+// import store from 'imports/redux/store';
 
 // const MainLayout = ({ content }) => {
 // const MainLayout = () => {
