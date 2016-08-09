@@ -125,10 +125,19 @@
     "no-undef": 1
     // Prevent misspellings. This is really important!
   },
+  //"settings": {
+  //  "import/resolver": "meteor",
+  //  "flowtype": {
+  //    "onlyFilesWithFlowAnnotation": true
+  //  }
+  //}
   "settings": {
-    "import/resolver": "meteor",
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
+    "import/resolver": {
+      "meteor": {
+        "extensions": [".js", ".jsx", ".es6" ],
+        "paths": [ "/", "/usr/local/share/global_modules" ],
+        "moduleDirectory": [ "node_modules", "/" ]
+        }
+      }
     }
-  }
 }
