@@ -8,7 +8,6 @@ import Form from 'react-jsonschema-form';
 import { Accounts } from 'meteor/accounts-base';
 
 const schema = {
-  // title: 'User',
   type: 'object',
   required: ['email'],
   properties: {
