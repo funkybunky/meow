@@ -7,8 +7,8 @@ import Thing from 'imports/features/SomeFeature/components/Thing';
 
 import { Login } from 'imports/common-ui/login/login';
 import { NotFound } from 'imports/common-ui/login/not-found';
-import { RecoverPassword } from 'imports/common-ui/login/recover-password';
-import { ResetPassword } from 'imports/common-ui/login/reset-password';
+import { RecoverPassword } from 'imports/common-ui/login/recoverPassword';
+import { ResetPassword } from 'imports/common-ui/login/resetPassword';
 import { Signup } from 'imports/common-ui/login/signup';
 
 // import { FlowRouter } from 'meteor/kadira:flow-router';

@@ -10,9 +10,9 @@ import { Accounts } from 'meteor/accounts-base';
 const schema = {
   title: 'User',
   type: 'object',
-  required: ['name', 'email', 'password'],
+  required: ['username', 'email', 'password'],
   properties: {
-    name: { type: 'string', title: 'Name', default: 'Jackson' },
+    username: { type: 'string', title: 'Username', default: 'Jackson' },
     email: { type: 'string', title: 'Email', default: 'jackson@dude.com' },
     password: { type: 'string', title: 'Password' },
   },
@@ -20,7 +20,7 @@ const schema = {
 
 const uiSchema = {
   password: {
-    'ui-widget': 'password',
+    'ui:widget': 'password',
   },
 };
 
@@ -29,8 +29,6 @@ const log = (type) => console.log.bind(console, type);
 export class Signup extends React.Component {
 
   handleSubmit({ formData }) {
-    console.log('data: ', formData);
-
     Accounts.createUser(formData, (error) => {
       if (error) {
         console.log('bla!', error);
@@ -43,7 +41,6 @@ export class Signup extends React.Component {
   }
 
   render() {
-    // return <div>Hello</div>;
     return (
       <Form
         schema={schema}

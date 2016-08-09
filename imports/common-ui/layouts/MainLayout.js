@@ -21,21 +21,27 @@
 
 // --------------------
 
-import React from 'react';
+/* global Meteor */
+
+import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
-// import AppNavigation from '../containers/app-navigation';
+import AppNavigation from '/imports/common-ui/navigation/app-navigation';
 
-const MainLayout = React.createClass({
-  propTypes: {
+export default class MainLayout extends Component {
+
+  static propTypes = {
     children: React.PropTypes.element,
-  },
-  render() {
-    return (<div>
-      <Grid>
-        {this.props.children}
-      </Grid>
-    </div>);
-  },
-});
+  }
 
-export default MainLayout;
+  render() {
+    return (
+      <div>
+        {Meteor.user() ? 'user!' : 'no user'}
+        <AppNavigation user={Meteor.user()} />
+        <Grid>
+          {this.props.children}
+        </Grid>
+      </div>
+    );
+  }
+}
