@@ -18,8 +18,8 @@ export const AuthenticatedNav = () => (
       <IndexLinkContainer to="/">
         <NavItem eventKey={1} href="/">Index</NavItem>
       </IndexLinkContainer>
-      <LinkContainer to="/thing">
-        <NavItem eventKey={2} href="/thing">Documents</NavItem>
+      <LinkContainer to="/groups">
+        <NavItem eventKey={2} href="/groups">Documents</NavItem>
       </LinkContainer>
     </Nav>
     <Nav pullRight>

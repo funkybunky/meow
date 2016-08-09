@@ -13,24 +13,33 @@ class Thing extends Component {
   };
 
   render() {
+    // return (
+    //   <div>Thing {React.cloneElement(this.props.children, { groups: this.props.groups })}</div>
+    // );
     return (
-      <div style={styles.root}>
-        <div>
-          <button
-            style={styles.button}
-            onClick={this.showProps}
-          >
-            Dump props
-          </button>
+      <div>
+      {this.props.ready
+        ? <div style={styles.root}>
+          <div>
+            <button
+              style={styles.button}
+              onClick={this.showProps}
+            >
+              Dump props
+            </button>
+          </div>
+          <div>
+            <button
+              style={styles.button}
+              onClick={this.callMethod}
+            >
+              Call Meteor method
+            </button>
+          </div>
+          {React.cloneElement(this.props.children, { groups: this.props.groups })}
         </div>
-        <div>
-          <button
-            style={styles.button}
-            onClick={this.callMethod}
-          >
-            Call Meteor method
-          </button>
-        </div>
+      : <div>Loading</div>
+    }
       </div>
     );
   }
@@ -51,6 +60,7 @@ Thing.propTypes = {
   ready: React.PropTypes.bool.isRequired,
   createGroup: React.PropTypes.func.isRequired,
   groups: React.PropTypes.array.isRequired,
+  children: React.PropTypes.element,
 };
 
 export default Radium(Thing);
