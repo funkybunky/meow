@@ -5,17 +5,14 @@ import React from 'react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Form from 'react-jsonschema-form';
 import { browserHistory } from 'react-router';
-import { Accounts } from 'meteor/accounts-base';
 
 const schema = {
-  title: 'User',
+  title: 'Login',
   type: 'object',
-  required: ['username', 'email', 'password'],
+  required: ['email', 'password'],
   properties: {
-    username: { type: 'string', title: 'Username', default: 'Jackson' },
     email: { type: 'string', title: 'Email', default: 'jackson@dude.com' },
     password: { type: 'string', title: 'Password' },
-    // done: { type: 'boolean', title: 'Done?', default: false },
   },
 };
 
@@ -35,53 +32,38 @@ export class Login extends React.Component {
 
   state = {
     message: '',
-    isLogin: true,
   }
 
   handleSubmit = ({ formData }) => {
     // console.log('handleSubmit formData: ', formData);
     const { email, password } = formData;
-    if (this.state.isLogin) {
-      Meteor.loginWithPassword(email, password, (error) => {
-        if (error) {
-          console.log('bla!', error);
-          Bert.alert(error.reason, 'warning');
-          this.setState({
-            message: 'wrong password! forgot the password? or not signed up, yet?',
-          });
-        } else {
-          console.log('success');
-          Bert.alert('Logged in!', 'success');
+    Meteor.loginWithPassword(email, password, (error) => {
+      if (error) {
+        console.log('bla!', error);
+        Bert.alert(error.reason, 'warning');
+        this.setState({
+          message: 'wrong password! forgot the password? or not signed up, yet?',
+        });
+      } else {
+        console.log('success');
+        Bert.alert('Logged in!', 'success');
+        this.setState({
+          message: 'successfully logged in!',
+        });
 
-          const { location } = this.props;
-          if (location.state && location.state.nextPathname) {
-            browserHistory.push(location.state.nextPathname);
-          } else {
-            browserHistory.push('/');
-          }
-        }
-      });
-    } else {
-      Accounts.createUser(formData, (error) => {
-        if (error) {
-          console.log('bla!', error);
-          Bert.alert(error.reason, 'danger');
+        const { location } = this.props;
+        if (location.state && location.state.nextPathname) {
+          browserHistory.push(location.state.nextPathname);
         } else {
           browserHistory.push('/');
-          Bert.alert('Welcome!', 'success');
         }
-      });
-    }
-  }
-
-  handleLoginSignupSwitch = () => {
-    this.setState({ isLogin: !this.state.isLogin, message: '' });
+      }
+    });
   }
 
   render() {
     return (
       <div>
-        <h2>{this.state.isLogin ? 'Login' : 'Signup'}</h2>
         <Form
           schema={schema}
           uiSchema={uiSchema}
@@ -89,20 +71,15 @@ export class Login extends React.Component {
           onSubmit={this.handleSubmit}
           onError={log('errors')}
         >
-          <button type="submit">{this.state.isLogin ? 'Login Now' : 'Signup Now'}</button>
-        </Form>
-        <button onClick={this.handleLoginSignupSwitch}>
-          {this.state.isLogin
-            ? 'Not signed in, yet?'
-            : 'Already signed in?'}
-        </button>
-        {this.state.message ? <div>{this.state.message}</div> : ' '}
-        {/* TODO: always show the forgot password link/message, not cinditionally */}
-        {this.state.message
-          ? <div>wrong password!
-            <a href="/recover-password">forgot the password?</a>
+          <button type="submit">Login Now</button>
+          <div>
+            <a href="/signup">Not signed up, yet?</a>
           </div>
-          : ' '}
+          <div>
+            <a href="/recover-password">Forgot your password?</a>
+          </div>
+        </Form>
+        {this.state.message ? <div>{this.state.message}</div> : ' '}
       </div>
     );
   }
