@@ -33,7 +33,9 @@ export class ResetPassword extends React.Component {
   componentWillMount() {
     if (!this.props.params && !this.props.params.token) {
       log('no token!');
-      // TODO: perform redirect
+      // Check is not needed actually, because React-Router expects a param
+      // for this route. If it is not there, the router passes on to the
+      // not-found 404 route handler. So the router does the job already.
     }
   }
 
@@ -69,7 +71,9 @@ export class ResetPassword extends React.Component {
         onSubmit={this.handleSubmit}
         onError={log('errors')}
         validate={this.validate}
-      />
+      >
+        <button type="submit">Recover Password</button>
+      </Form>
     );
   }
 }
