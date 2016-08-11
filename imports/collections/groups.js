@@ -10,6 +10,8 @@ export const Group = Class.create({
   collection: Groups,
   fields: {
     name: String,
+    // description: String,
+    members: [String],
   },
 });
 

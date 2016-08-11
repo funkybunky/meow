@@ -22,7 +22,10 @@ export const AuthenticatedNav = () => (
         <NavItem eventKey={2} href="/groups">Browse Groups</NavItem>
       </LinkContainer>
       <LinkContainer to="/groups/new">
-        <NavItem eventKey={2} href="/groups">Create Group</NavItem>
+        <NavItem eventKey={4} href="/groups">Create Group</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/groups/my">
+        <NavItem eventKey={5} href="/groups">My Groups</NavItem>
       </LinkContainer>
     </Nav>
     <Nav pullRight>

@@ -20,7 +20,7 @@
   ],
   "rules": {
     // My own rules
-    "no-underscore-dangle": [ 2, { "allow": [ "id" ] } ],
+    "no-underscore-dangle": [ 2, { "allow": [ "_id" ] } ],
 
     // Possible errors
     "comma-dangle": [1, "always-multiline"],

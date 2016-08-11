@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -15,6 +17,7 @@ import { Signup } from 'imports/common-ui/login/signup';
 import ListGroups from 'imports/features/SomeFeature/components/Thing/ListGroups.js';
 import GroupsNew from 'imports/features/SomeFeature/components/Thing/GroupsNew.js';
 import GroupsSingle from 'imports/features/SomeFeature/components/Thing/GroupsSingle.js';
+import GroupsMy from 'imports/features/SomeFeature/components/Thing/GroupsMy.js';
 
 // import { FlowRouter } from 'meteor/kadira:flow-router';
 // import { mount } from 'react-mounter';
@@ -52,6 +55,7 @@ Meteor.startup(() => {
           {/* <Route name="all-groups" path="/groups/all" component={ListGroups} onEnter={requireAuth} /> */}
           <IndexRoute name="all-groups" component={ListGroups} onEnter={requireAuth} />
           <Route name="new-group" path="/groups/new" component={GroupsNew} onEnter={requireAuth} />
+          <Route name="my-groups" path="/groups/my" component={GroupsMy} onEnter={requireAuth} />
           {/* <Route name="find-group" path="/groups/find" component={FindGroup} onEnter={requireAuth} /> */}
           <Route name="single-group" path="/groups/:id" component={GroupsSingle} onEnter={requireAuth} />
         </Route>
