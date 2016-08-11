@@ -19,6 +19,9 @@
     "react"
   ],
   "rules": {
+    // My own rules
+    "no-underscore-dangle": [ 2, { "allow": [ "id" ] } ],
+
     // Possible errors
     "comma-dangle": [1, "always-multiline"],
     "no-console": 0,
