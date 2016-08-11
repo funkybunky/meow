@@ -12,6 +12,13 @@ class Thing extends Component {
     console.log(this.props);
   };
 
+  _addProps = (element) => {
+    return React.cloneElement(element, {
+      groups: this.props.groups,
+      createGroup: this.props.createGroup,
+    });
+  }
+
   render() {
     // return (
     //   <div>Thing {React.cloneElement(this.props.children, { groups: this.props.groups })}</div>
@@ -36,7 +43,11 @@ class Thing extends Component {
               Call Meteor method
             </button>
           </div>
-          {React.cloneElement(this.props.children, { groups: this.props.groups })}
+          {React.Children.map(this.props.children, this._addProps)}
+          {/* {React.cloneElement(this.props.children, {
+            groups: this.props.groups,
+            createGroup: this.props.createGroup,
+          })} */}
         </div>
       : <div>Loading</div>
     }
@@ -59,7 +70,9 @@ const styles = {
 Thing.propTypes = {
   ready: React.PropTypes.bool.isRequired,
   createGroup: React.PropTypes.func.isRequired,
-  groups: React.PropTypes.array.isRequired,
+  groups: React.PropTypes.array,
+  // groups cannot be required, cause it will be available after the
+  // subscription is ready, so on first render it won't be defined
   children: React.PropTypes.element,
 };
 

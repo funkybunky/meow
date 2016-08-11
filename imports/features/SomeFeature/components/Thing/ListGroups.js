@@ -3,6 +3,7 @@ import Radium from 'radium';
 
 const GroupElem = (props) => <div><h2>{props.name}</h2><hr /></div>;
 
+// TODO: see if you can change it to a stateless component, works with Radium?
 class ListGroups extends Component {
 
   render() {
@@ -29,7 +30,7 @@ const styles = {
 };
 
 ListGroups.propTypes = {
-  groups: React.PropTypes.array.isRequired,
+  groups: React.PropTypes.array,
 };
 
 export default Radium(ListGroups);
