@@ -27,6 +27,7 @@ const joinGroup = new ValidatedMethod({
         members: newMembers,
       },
     });
+    Meteor.user().myGroups.push(id);
     return true;
   },
 });
