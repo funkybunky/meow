@@ -7,6 +7,7 @@ import joinGroup from 'imports/features/SomeFeature/methods/joinGroup.method';
 import Thing from './Thing';
 export default createContainer(() => {
   const groupsHandle = Meteor.subscribe('groups.all');
+  const userHandle = Meteor.subscribe('users.current');
 
   // Maybe write a higher-order function for this later
   const createGroup = (args, callback) => {
@@ -18,9 +19,10 @@ export default createContainer(() => {
   };
 
   return {
-    ready: groupsHandle.ready(),
+    ready: groupsHandle.ready() && userHandle.ready(),
     groups: Groups.find({}).fetch(),
     createGroup,
     joinGroup: joinGroupHandler,
+    user: Meteor.user(),
   };
 }, Thing);

@@ -11,7 +11,10 @@ export const Group = Class.create({
   fields: {
     name: String,
     // description: String,
-    members: [String],
+    members: {
+      type: [String],
+      default: [],
+    },
   },
 });
 

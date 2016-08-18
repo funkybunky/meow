@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 
-const GroupElem = (props) => <div><a href={`/groups/${props.id}`}><h2>{props.name}</h2></a><hr /></div>;
+const GroupElem = (props) => (
+  <div>
+    <a href={`/groups/${props.id}`}><h2>{props.name}</h2></a>
+    <button onClick={props.joinGroup(props.id)}>Join</button>
+    <hr />
+  </div>
+);
 
 // TODO: see if you can change it to a stateless component, works with Radium?
 class ListGroups extends Component {
@@ -11,7 +17,12 @@ class ListGroups extends Component {
       <div>
         <h2>All Groups:</h2>
         {this.props.groups.map((group) =>
-          <GroupElem name={group.name} key={group._id} id={group._id} />
+          <GroupElem
+            name={group.name}
+            key={group._id}
+            id={group._id}
+            joinGroup={this.props.joinGroup}
+          />
         )}
       </div>
     );
@@ -31,6 +42,7 @@ const styles = {
 
 ListGroups.propTypes = {
   groups: React.PropTypes.array,
+  joinGroup: React.PropTypes.func.isRequired,
 };
 
 export default Radium(ListGroups);

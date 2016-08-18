@@ -7,17 +7,15 @@ const joinGroup = new ValidatedMethod({
   name: 'joinGroup',
 
   validate(args) {
-    check(args, {
-      id: String,
-    });
+    check(args, String); // just takes the ID, a string
   },
 
-  run({ id }) {
+  run(id) {
     console.log('Executing on client?', this.isSimulation);
     console.log('Got id of group to join:', id);
     const group = Groups.findOne(id);
     if (!group) throw new Meteor.Error('Given ID doesn\'t match any group.');
-    if (Meteor.user() in group.members) {
+    if (Meteor.user()._id in group.members) {
       console.log('already in the group');
       return false;
     }

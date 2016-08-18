@@ -16,6 +16,8 @@ class Thing extends Component {
     return React.cloneElement(element, {
       groups: this.props.groups,
       createGroup: this.props.createGroup,
+      joinGroup: this.props.joinGroup,
+      user: this.props.user,
     });
   }
 
@@ -74,6 +76,8 @@ Thing.propTypes = {
   // groups cannot be required, cause it will be available after the
   // subscription is ready, so on first render it won't be defined
   children: React.PropTypes.element,
+  joinGroup: React.PropTypes.func.isRequired,
+  user: React.PropTypes.object,
 };
 
 export default Radium(Thing);

@@ -3,8 +3,8 @@ import React from 'react';
 import GroupsList from './ListGroups';
 
 const GroupsMy = (props) => {
-  const userGroupIds = Meteor.user().myGroups;
-  if (!userGroupIds) throw new Error('NOOOOO');
+  const userGroupIds = props.user.myGroups;
+  if (!userGroupIds) throw new Error('NOOOOO myGroups prop not on user obj');
   const userGroups = userGroupIds.reduce((myGroups, groupId) => {
     const groups = props.groups.filter((group) => group._id === groupId);
     if (groups.length === 1) {
@@ -12,8 +12,13 @@ const GroupsMy = (props) => {
     }
     return myGroups;
   }, []);
-  const GroupsListMy = React.cloneElement(GroupsList, { groups: userGroups });
-  return GroupsListMy;
+  return <GroupsList groups={userGroups} joinGroup={props.joinGroup} />;
+};
+
+GroupsMy.propTypes = {
+  groups: React.PropTypes.array,
+  joinGroup: React.PropTypes.func,
+  user: React.PropTypes.object,
 };
 
 export default GroupsMy;
