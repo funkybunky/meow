@@ -42,7 +42,7 @@ const styles = {
 
 ListGroups.propTypes = {
   groups: React.PropTypes.array,
-  joinGroup: React.PropTypes.func.isRequired,
+  joinGroup: React.PropTypes.func,
 };
 
 export default Radium(ListGroups);

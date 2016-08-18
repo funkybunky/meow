@@ -11,10 +11,12 @@ export default createContainer(() => {
 
   // Maybe write a higher-order function for this later
   const createGroup = (args, callback) => {
+    console.log('createGroup handler');
     _createGroup.call(args, callback);
   };
 
   const joinGroupHandler = (args, cb) => {
+    console.log('joinGroupHandler');
     joinGroup.call(args, cb);
   };
 

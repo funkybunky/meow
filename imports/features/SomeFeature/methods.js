@@ -18,6 +18,7 @@ export const createGroup = new ValidatedMethod({
     console.log('Got name:', name);
     const id = Groups.insert({
       name,
+      members: [],
     });
     return id;
   },
