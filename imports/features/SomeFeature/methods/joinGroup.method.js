@@ -25,7 +25,12 @@ const joinGroup = new ValidatedMethod({
         members: newMembers,
       },
     });
-    Meteor.user().myGroups.push(id);
+    Meteor.user().myGroups.push(id); // TODO: I don't think that this works..
+    Meteor.users.update(Meteor.userId(), {
+      $set: {
+        myGroups: Meteor.user().myGroups.concat(id),
+      },
+    });
     return true;
   },
 });

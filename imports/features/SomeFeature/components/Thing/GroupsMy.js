@@ -12,7 +12,13 @@ const GroupsMy = (props) => {
     }
     return myGroups;
   }, []);
-  return <GroupsList groups={userGroups} joinGroup={props.joinGroup} />;
+  return (
+    <GroupsList
+      groups={userGroups}
+      joinGroup={props.joinGroup}
+      title="My Groups"
+    />
+  );
 };
 
 GroupsMy.propTypes = {
