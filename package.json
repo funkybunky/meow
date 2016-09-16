@@ -1,7 +1,7 @@
 {
-  "name": "my-project",
+  "name": "dogroups",
   "version": "0.1.0",
-  "description": "My project",
+  "description": "dogroups",
   "scripts": {
     "install-redux": "npm i --save react-redux redux redux-logger redux-thunk && mv imports/.redux imports/redux",
     "lint": "eslint .",
@@ -13,7 +13,7 @@
   "jest": {
     "automock": false
   },
-  "author": "myself",
+  "author": "Marcus Kleppe",
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
