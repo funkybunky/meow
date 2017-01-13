@@ -2,7 +2,7 @@
   "root": "/",
   "resolve": {
     "alias": {
-      "GroupsPath": "imports/features/SomeFeature/"
+      "GamesPath": "imports/features/SomeFeature/"
     }
   }
 }

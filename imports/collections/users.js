@@ -16,7 +16,7 @@ const User = Class.create({
       },
     },
     profile: Object,
-    myGroups: {
+    myGames: {
       type: [String],
       default: [],
     },

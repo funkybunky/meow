@@ -1,4 +1,4 @@
-import { Groups } from 'imports/collections/groups.js';
+import { Games } from 'imports/collections/games.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -14,7 +14,7 @@ export const createGroup = new ValidatedMethod({
   run({ name }) {
     console.log('Executing on client?', this.isSimulation);
     console.log('Got name:', name);
-    const id = Groups.insert({
+    const id = Games.insert({
       name,
       members: [],
     });
@@ -35,7 +35,7 @@ export const updateGroup = new ValidatedMethod({
   run({ _id, name }) {
     console.log('Executing on client?', this.isSimulation);
     console.log('Got name:', name);
-    Groups.update(_id, {
+    Games.update(_id, {
       name,
     });
     return true;
@@ -52,7 +52,7 @@ export const deleteGroup = new ValidatedMethod({
   run(id) {
     console.log('Executing on client?', this.isSimulation);
     console.log('Got id:', id);
-    Groups.remove(id);
+    Games.remove(id);
     return true;
   },
 });

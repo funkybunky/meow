@@ -1,7 +1,7 @@
 # Work in Progress!
 
-# DoGroups
-Form groups with others who share the same goals and meet up regularly online to help each other.
+# DoGames
+Form games with others who share the same goals and meet up regularly online to help each other.
 
 ## Stack
 I took the ffx-boilerplate as a starting point and added stuff from the base-boilerplate as I saw fit.

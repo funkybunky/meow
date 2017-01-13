@@ -13,14 +13,14 @@ class Thing extends Component {
   };
 
   _addProps = (element) => React.cloneElement(element, {
-    groups: this.props.groups,
+    games: this.props.games,
     createGroup: this.props.createGroup,
     user: this.props.user,
   })
 
   render() {
     // return (
-    //   <div>Thing {React.cloneElement(this.props.children, { groups: this.props.groups })}</div>
+    //   <div>Thing {React.cloneElement(this.props.children, { games: this.props.games })}</div>
     // );
     return (
       <div>
@@ -44,7 +44,7 @@ class Thing extends Component {
           </div>
           {React.Children.map(this.props.children, this._addProps)}
           {/* {React.cloneElement(this.props.children, {
-            groups: this.props.groups,
+            games: this.props.games,
             createGroup: this.props.createGroup,
           })} */}
         </div>
@@ -69,8 +69,8 @@ const styles = {
 Thing.propTypes = {
   ready: React.PropTypes.bool.isRequired,
   createGroup: React.PropTypes.func.isRequired,
-  groups: React.PropTypes.array,
-  // groups cannot be required, cause it will be available after the
+  games: React.PropTypes.array,
+  // games cannot be required, cause it will be available after the
   // subscription is ready, so on first render it won't be defined
   children: React.PropTypes.element,
   joinGroup: React.PropTypes.func.isRequired,

@@ -1,2 +1,2 @@
-import '../../collections/groups';
+import '../../collections/games';
 import '../../collections/users';
