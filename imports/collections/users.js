@@ -31,4 +31,4 @@ if (Meteor.isServer) {
   });
 }
 
-globalizeData({ Meteor.users }, { User });
+globalizeData(Meteor.users, { User });
