@@ -3,7 +3,7 @@ import Radium from 'radium';
 
 class Thing extends Component {
   callMethod = () => {
-    this.props.createGroup({ name: 'Unknown' }, (error, result) => {
+    this.props.joinGame({ playerId: this.props.user._id }, (error, result) => {
       console.log(error, result);
     });
   };
@@ -14,7 +14,7 @@ class Thing extends Component {
 
   _addProps = (element) => React.cloneElement(element, {
     games: this.props.games,
-    createGroup: this.props.createGroup,
+    joinGame: this.props.joinGame,
     user: this.props.user,
   })
 
@@ -39,13 +39,13 @@ class Thing extends Component {
               style={styles.button}
               onClick={this.callMethod}
             >
-              Call Meteor method
+              Join Game!
             </button>
           </div>
           {React.Children.map(this.props.children, this._addProps)}
           {/* {React.cloneElement(this.props.children, {
             games: this.props.games,
-            createGroup: this.props.createGroup,
+            joinGame: this.props.joinGame,
           })} */}
         </div>
       : <div>Loading</div>
@@ -68,12 +68,11 @@ const styles = {
 
 Thing.propTypes = {
   ready: React.PropTypes.bool.isRequired,
-  createGroup: React.PropTypes.func.isRequired,
+  joinGame: React.PropTypes.func.isRequired,
   games: React.PropTypes.array,
   // games cannot be required, cause it will be available after the
   // subscription is ready, so on first render it won't be defined
   children: React.PropTypes.element,
-  joinGroup: React.PropTypes.func.isRequired,
   user: React.PropTypes.object,
 };
 

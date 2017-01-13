@@ -10,7 +10,7 @@ export default createContainer(() => {
 
   // Maybe write a higher-order function for this later
   const joinGame = (args, callback) => {
-    console.log('joinGame handler');
+    console.log('joinGame handler. args: ', args);
     _joinGame.call(args, callback);
   };
 

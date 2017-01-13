@@ -1,15 +1,13 @@
 import React from 'react';
-// import Thing from 'imports/features/SomeFeature/components/Thing';
+import Thing from 'imports/features/SomeFeature/components/Thing';
 
-const Home = () => {
-  return (
+const Home = () => (
     <div>
       <h1>Home.</h1>
       <div>
-        {/* <Thing /> */}
+        <Thing />
       </div>
     </div>
   );
-};
 
 export default Home;

@@ -1,4 +1,4 @@
-import { Games } from 'imports/collections/games.js';
+import { Games, Game } from 'imports/collections/games.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -12,18 +12,35 @@ export const joinGame = new ValidatedMethod({
   },
 
   run({ playerId }) {
-    console.log('Executing on client?', this.isSimulation);
+    console.log('Method joinGame. Executing on client?', this.isSimulation);
     console.log('Got id:', playerId);
-    const currentGame = Games.findOne({});
+    let currentGame = Game.findOne();
     console.log('game: ', currentGame);
+    if (!currentGame) {
+      const newGame = new Game({
+        hasStarted: false,
+        isBettingPhase: true,
+        player1Id: '',
+        player1Balance: 0,
+        player2Id: '',
+        player2Balance: 0,
+        blind: 10,
+        player1Bet: 0,
+        player2Bet: 0,
+      });
+      newGame.save();
+      currentGame = newGame;
+      console.log('new game created!');
+    }
     if (currentGame.player1Id) {
       if (currentGame.player2Id) {
         throw new Error('game already full');
       }
-      Games.update(currentGame._id, { $set: { player2Id: playerId } });
+      currentGame.player2Id = playerId;
     } else {
-      Games.update(currentGame._id, { $set: { player1Id: playerId } });
+      currentGame.player1Id = playerId;
     }
+    currentGame.save();
     return true;
   },
 });
