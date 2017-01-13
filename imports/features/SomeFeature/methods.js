@@ -2,23 +2,29 @@ import { Games } from 'imports/collections/games.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-export const createGroup = new ValidatedMethod({
-  name: 'createGroup',
+export const joinGame = new ValidatedMethod({
+  name: 'joinGame',
 
   validate(args) {
     check(args, {
-      name: String,
+      playerId: String,
     });
   },
 
-  run({ name }) {
+  run({ playerId }) {
     console.log('Executing on client?', this.isSimulation);
-    console.log('Got name:', name);
-    const id = Games.insert({
-      name,
-      members: [],
-    });
-    return id;
+    console.log('Got id:', playerId);
+    const currentGame = Games.findOne({});
+    console.log('game: ', currentGame);
+    if (currentGame.player1Id) {
+      if (currentGame.player2Id) {
+        throw new Error('game already full');
+      }
+      Games.update(currentGame._id, { $set: { player2Id: playerId } });
+    } else {
+      Games.update(currentGame._id, { $set: { player1Id: playerId } });
+    }
+    return true;
   },
 });
 
