@@ -14,12 +14,7 @@ import { ResetPassword } from 'imports/common-ui/login/resetPassword';
 import { Signup } from 'imports/common-ui/login/signup';
 
 // Always remember to check whether it's export or export default!
-import ListGroups from 'imports/features/SomeFeature/components/Thing/ListGroups.js';
-import GroupsNew from 'imports/features/SomeFeature/components/Thing/GroupsNew.js';
-import GroupsSingle from 'imports/features/SomeFeature/components/Thing/GroupsSingle.js';
-import GroupsMy from 'imports/features/SomeFeature/components/Thing/GroupsMy.js';
 
-// import { FlowRouter } from 'meteor/kadira:flow-router';
 // import { mount } from 'react-mounter';
 import MainLayout from '../../common-ui/layouts/MainLayout';
 import Home from '../../common-ui/pages/Home';
@@ -50,15 +45,7 @@ Meteor.startup(() => {
         <Route path="/test" component={TestParent} >
           <Route path="/test/all" component={TestChild} />
         </Route>
-        <Route name="groups" path="/groups" component={Thing} onEnter={requireAuth} >
-          {/* <IndexRedirect to="/groups/all" /> */}
-          {/* <Route name="all-groups" path="/groups/all" component={ListGroups} onEnter={requireAuth} /> */}
-          <IndexRoute name="all-groups" component={ListGroups} onEnter={requireAuth} />
-          <Route name="new-group" path="/groups/new" component={GroupsNew} onEnter={requireAuth} />
-          <Route name="my-groups" path="/groups/my" component={GroupsMy} onEnter={requireAuth} />
-          {/* <Route name="find-group" path="/groups/find" component={FindGroup} onEnter={requireAuth} /> */}
-          <Route name="single-group" path="/groups/:id" component={GroupsSingle} onEnter={requireAuth} />
-        </Route>
+        <Route name="thing" path="thing" component={Thing} />
         <Route name="login" path="/login" component={Login} />
         <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
         <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
@@ -69,10 +56,3 @@ Meteor.startup(() => {
     document.getElementById('react-root')
   );
 });
-
-// FlowRouter.route('/', {
-//   name: 'home',
-//   action() {
-//     mount(MainLayout, { content: () => <Home /> });
-//   },
-// });

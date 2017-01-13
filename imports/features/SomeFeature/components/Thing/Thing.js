@@ -12,14 +12,11 @@ class Thing extends Component {
     console.log(this.props);
   };
 
-  _addProps = (element) => {
-    return React.cloneElement(element, {
-      groups: this.props.groups,
-      createGroup: this.props.createGroup,
-      joinGroup: this.props.joinGroup,
-      user: this.props.user,
-    });
-  }
+  _addProps = (element) => React.cloneElement(element, {
+    groups: this.props.groups,
+    createGroup: this.props.createGroup,
+    user: this.props.user,
+  })
 
   render() {
     // return (
