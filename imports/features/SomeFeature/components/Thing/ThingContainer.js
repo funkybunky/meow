@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Games } from 'imports/collections/games.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { createGroup as _createGroup } from '../../methods';
+import { joinGame as _joinGame } from '../../methods';
 
 import Thing from './Thing';
 export default createContainer(() => {
@@ -9,15 +9,15 @@ export default createContainer(() => {
   const userHandle = Meteor.subscribe('users.current');
 
   // Maybe write a higher-order function for this later
-  const createGroup = (args, callback) => {
-    console.log('createGroup handler');
-    _createGroup.call(args, callback);
+  const joinGame = (args, callback) => {
+    console.log('joinGame handler');
+    _joinGame.call(args, callback);
   };
 
   return {
     ready: gamesHandle.ready() && userHandle.ready(),
     games: Games.find({}).fetch(),
-    createGroup,
+    joinGame,
     user: Meteor.user(),
   };
 }, Thing);
