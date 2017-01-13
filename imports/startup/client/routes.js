@@ -45,7 +45,7 @@ Meteor.startup(() => {
         <Route path="/test" component={TestParent} >
           <Route path="/test/all" component={TestChild} />
         </Route>
-        <Route name="thing" path="thing" component={Thing} />
+        <Route name="thing" path="/thing" component={Thing} />
         <Route name="login" path="/login" component={Login} />
         <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
         <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
