@@ -36,6 +36,9 @@ export const joinGame = new ValidatedMethod({
       if (currentGame.player2Id) {
         throw new Error('game already full');
       }
+      if (currentGame.player1Id === playerId) {
+        throw new Error('you already joined the game, dude!');
+      }
       currentGame.player2Id = playerId;
     } else {
       currentGame.player1Id = playerId;
