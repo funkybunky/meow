@@ -1,7 +1,7 @@
 {
-  "name": "dogroups",
+  "name": "myboilerplate",
   "version": "0.1.0",
-  "description": "dogroups",
+  "description": "my own boilerplate for meteor 1.4",
   "scripts": {
     "install-redux": "npm i --save react-redux redux redux-logger redux-thunk && mv imports/.redux imports/redux",
     "lint": "eslint .",
