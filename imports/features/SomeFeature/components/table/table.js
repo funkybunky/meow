@@ -14,6 +14,8 @@ class Table extends Component {
 
   getOpponentName = () => {
     const game = this.props.games[0];
+    debugger;
+    console.log('getOpponentName. props:', this.props);
     if (game.player1Id === this.props.user._id) {
       return game.player2Name;
     } else if (game.player2Id === this.props.user._id) {
@@ -30,7 +32,7 @@ class Table extends Component {
         ? <div style={styles.root}>
           <h2>Table</h2>
           <h3>You: {this.props.user.username}</h3>
-          <h3>Opponent: {this.getOpponentName}</h3>
+          <h3>Opponent: {this.getOpponentName()}</h3>
           {React.Children.map(this.props.children, this._addProps)}
         </div>
       : <div>Loading</div>
