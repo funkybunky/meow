@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import { browserHistory } from 'react-router';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 class Thing extends Component {
+
+  state = {
+    hasJoinedGame: false,
+  };
+
   callMethod = () => {
     this.props.joinGame({ playerId: this.props.user._id }, (error, result) => {
-      console.log(error, result);
+      console.log('callMethod callback: ', error, result);
+      if (result) {
+        this.setState({
+          hasJoinedGame: true,
+        });
+        browserHistory.push('/table');
+      } else {
+        Bert.alert(error, 'warning');
+      }
     });
   };
 

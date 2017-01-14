@@ -6,6 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 // @flow
 import Thing from 'imports/features/SomeFeature/components/Thing';
+import Table from 'imports/features/SomeFeature/components/table/table_container';
 
 import { Login } from 'imports/common-ui/login/login';
 import { NotFound } from 'imports/common-ui/login/not-found';
@@ -46,6 +47,7 @@ Meteor.startup(() => {
           <Route path="/test/all" component={TestChild} />
         </Route>
         <Route name="thing" path="/thing" component={Thing} />
+        <Route name="table" path="/table" component={Table} />
         <Route name="login" path="/login" component={Login} />
         <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
         <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
