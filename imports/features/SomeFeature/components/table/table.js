@@ -14,7 +14,6 @@ class Table extends Component {
 
   getOpponentName = () => {
     const game = this.props.games[0];
-    debugger;
     console.log('getOpponentName. props:', this.props);
     if (game.player1Id === this.props.user._id) {
       return game.player2Name;
