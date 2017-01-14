@@ -16,6 +16,8 @@ class Table extends Component {
     const game = this.props.games[0];
     if (game.player1Id === this.props.user._id) {
       return game.player2Name;
+    } else if (game.player2Id === this.props.user._id) {
+      return game.player1Name;
     }
     console.log('bla');
     return 'bad guy';
