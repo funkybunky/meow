@@ -9,9 +9,17 @@ class Table extends Component {
 
   _addProps = (element) => React.cloneElement(element, {
     games: this.props.games,
-    joinGame: this.props.joinGame,
     user: this.props.user,
   })
+
+  getOpponentName = () => {
+    const game = this.props.games[0];
+    if (game.player1Id === this.props.user._id) {
+      return game.player2Name;
+    }
+    console.log('bla');
+    return 'bad guy';
+  }
 
   render() {
     return (
@@ -20,6 +28,7 @@ class Table extends Component {
         ? <div style={styles.root}>
           <h2>Table</h2>
           <h3>You: {this.props.user.username}</h3>
+          <h3>Opponent: {this.getOpponentName}</h3>
           {React.Children.map(this.props.children, this._addProps)}
         </div>
       : <div>Loading</div>

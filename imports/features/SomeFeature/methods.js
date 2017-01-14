@@ -1,4 +1,5 @@
 import { Games, Game } from 'imports/collections/games.js';
+import { Users } from 'imports/collections/users.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -14,6 +15,12 @@ export const joinGame = new ValidatedMethod({
   run({ playerId }) {
     console.log('Method joinGame. Executing on client?', this.isSimulation);
     console.log('Got id:', playerId);
+    console.log('userId: ', this.userId);
+    if (!this.userId) {
+      throw new Error('you must be logged in to join a game');
+    }
+    const userId = this.userId;
+    const userName = Users.findOne(userId).username;
     let currentGame = Game.findOne();
     console.log('game: ', currentGame);
     if (!currentGame) {
@@ -21,8 +28,10 @@ export const joinGame = new ValidatedMethod({
         hasStarted: false,
         isBettingPhase: true,
         player1Id: '',
+        player1Name: '',
         player1Balance: 0,
         player2Id: '',
+        player2Name: '',
         player2Balance: 0,
         blind: 10,
         player1Bet: 0,
@@ -40,8 +49,10 @@ export const joinGame = new ValidatedMethod({
         throw new Error('you already joined the game, dude!');
       }
       currentGame.player2Id = playerId;
+      currentGame.player2Name = userName;
     } else {
       currentGame.player1Id = playerId;
+      currentGame.player1Name = userName;
     }
     currentGame.save();
     return true;

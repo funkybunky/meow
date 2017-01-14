@@ -23,6 +23,9 @@ export const Game = Class.create({
       type: String,
       label: '',
     },
+    player1Name: {
+      type: String,
+    },
     player1Balance: {
       type: Number,
       label: 'Total balance',
@@ -30,6 +33,9 @@ export const Game = Class.create({
     player2Id: {
       type: String,
       label: '',
+    },
+    player2Name: {
+      type: String,
     },
     player2Balance: {
       type: Number,
