@@ -1,5 +1,6 @@
+/* global Meteor */
 import { Games, Game } from 'imports/collections/games.js';
-import { Users } from 'imports/collections/users.js';
+// import { Users } from 'imports/collections/users.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -20,7 +21,9 @@ export const joinGame = new ValidatedMethod({
       throw new Error('you must be logged in to join a game');
     }
     const userId = this.userId;
-    const userName = Users.findOne(userId).username;
+    const userName = Meteor.users.findOne(userId).username;
+    console.log('userName: ', userName);
+
     let currentGame = Game.findOne();
     console.log('game: ', currentGame);
     if (!currentGame) {
