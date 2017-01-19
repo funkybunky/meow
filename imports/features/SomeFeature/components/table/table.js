@@ -71,6 +71,7 @@ class Table extends Component {
           {this.isOpponentLive()
             ? <div>
                 <h3>Opponent: {this.getOpponentName()}</h3>
+                <p>stack: {this.getOpponentPlayer().balance} </p>
               </div>
             : <div>Waiting for your opponent</div>
           }
