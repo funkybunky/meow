@@ -42,7 +42,12 @@ class Table extends Component {
           <h2>Table</h2>
           <h3>You: {this.props.user.username}</h3>
           <p>Your stack: {this.getUserStack()}</p>
-          <h3>Opponent: {this.getOpponentName()}</h3>
+          {this.isOpponentLive
+            ? <div>
+                <h3>Opponent: {this.getOpponentName()}</h3>
+              </div>
+            : <div>Waiting for your opponent</div>
+          }
           {React.Children.map(this.props.children, this._addProps)}
         </div>
       : <div>Loading</div>
