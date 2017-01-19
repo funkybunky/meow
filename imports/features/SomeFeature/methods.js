@@ -82,11 +82,11 @@ export const updateGroup = new ValidatedMethod({
   },
 });
 
-export const deleteGroup = new ValidatedMethod({
-  name: 'deleteGroup',
+export const deleteGame = new ValidatedMethod({
+  name: 'deleteGame',
 
   validate(args) {
-    check(args, String); // the ID
+    check(args, String); // the ID of the game to delete
   },
 
   run(id) {
