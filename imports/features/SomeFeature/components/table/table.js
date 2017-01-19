@@ -48,10 +48,6 @@ class Table extends Component {
     };
   }
 
-  getOpponentName = () => this.getOpponentPlayer().name;
-
-  getUserStack = () => this.getUserPlayer().balance;
-
   isOpponentLive = () => {
     const opponent = this.getOpponentPlayer();
     if (!opponent._id) {
@@ -67,10 +63,10 @@ class Table extends Component {
         ? <div style={styles.root}>
           <h2>Table</h2>
           <h3>You: {this.props.user.username}</h3>
-          <p>Your stack: {this.getUserStack()}</p>
+          <p>Your stack: {this.getUserPlayer().balance}</p>
           {this.isOpponentLive()
             ? <div>
-                <h3>Opponent: {this.getOpponentName()}</h3>
+                <h3>Opponent: {this.getOpponentPlayer().name}</h3>
                 <p>stack: {this.getOpponentPlayer().balance} </p>
               </div>
             : <div>Waiting for your opponent</div>
