@@ -101,7 +101,6 @@ export const deleteAllGames = new ValidatedMethod({
   name: 'deleteAllGames',
 
   validate() {
-    return true;
   },
 
   run() {
