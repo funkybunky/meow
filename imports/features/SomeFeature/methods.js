@@ -96,3 +96,14 @@ export const deleteGame = new ValidatedMethod({
     return true;
   },
 });
+
+export const deleteAllGames = new ValidatedMethod({
+  name: 'deleteAllGames',
+
+  run() {
+    Games.remove({});
+    console.log('removed all games. current number of games: ',
+    Games.find({}).count());
+    return true;
+  },
+});
