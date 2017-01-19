@@ -100,6 +100,10 @@ export const deleteGame = new ValidatedMethod({
 export const deleteAllGames = new ValidatedMethod({
   name: 'deleteAllGames',
 
+  validate() {
+    return true;
+  },
+
   run() {
     Games.remove({});
     console.log('removed all games. current number of games: ',
