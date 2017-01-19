@@ -12,6 +12,24 @@ class Table extends Component {
     user: this.props.user,
   })
 
+  getUserPlayer = () => {
+    const game = this.props.games[0];
+    if (game.player1Id !== this.props.user._id) {
+      // Current user is player1.
+      return {
+        _id: game.player1Id,
+        balance: game.player1Balance,
+        name: game.player1Name,
+      };
+    }
+    // Current user is not player1 which means that player1 is the user.
+    return {
+      _id: game.player2Id,
+      balance: game.player2Balance,
+      name: game.player2Name,
+    };
+  }
+
   getOpponentPlayer = () => {
     const game = this.props.games[0];
     if (game.player1Id === this.props.user._id) {
@@ -32,15 +50,7 @@ class Table extends Component {
 
   getOpponentName = () => this.getOpponentPlayer().name;
 
-  getUserStack = () => {
-    const game = this.props.games[0];
-    console.log('getUserStack. props:', this.props);
-    if (game.player1Id === this.props.user._id) {
-      return game.player2Balance;
-    } else if (game.player2Id === this.props.user._id) {
-      return game.player1Balance;
-    }
-  }
+  getUserStack = () => this.getUserPlayer().balance;
 
   isOpponentLive = () => {
     const opponent = this.getOpponentPlayer();
