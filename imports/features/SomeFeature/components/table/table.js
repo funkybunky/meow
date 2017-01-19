@@ -24,6 +24,16 @@ class Table extends Component {
     return 'bad guy';
   }
 
+  getUserStack = () => {
+    const game = this.props.games[0];
+    console.log('getUserStack. props:', this.props);
+    if (game.player1Id === this.props.user._id) {
+      return game.player2Balance;
+    } else if (game.player2Id === this.props.user._id) {
+      return game.player1Balance;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -31,6 +41,7 @@ class Table extends Component {
         ? <div style={styles.root}>
           <h2>Table</h2>
           <h3>You: {this.props.user.username}</h3>
+          <p>Your stack: {this.getUserStack()}</p>
           <h3>Opponent: {this.getOpponentName()}</h3>
           {React.Children.map(this.props.children, this._addProps)}
         </div>
