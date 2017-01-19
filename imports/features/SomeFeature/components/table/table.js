@@ -1,3 +1,4 @@
+/* global Meteor */
 import React, { Component } from 'react';
 import Radium from 'radium';
 
@@ -12,8 +13,15 @@ class Table extends Component {
     user: this.props.user,
   })
 
+  getGame = () => {
+    if (!this.props.games[0]) {
+      throw new Meteor.Error('NO GAME!');
+    }
+    return this.props.games[0];
+  }
+
   getUserPlayer = () => {
-    const game = this.props.games[0];
+    const game = this.getGame();
     if (game.player1Id !== this.props.user._id) {
       // Current user is player1.
       return {
@@ -31,7 +39,7 @@ class Table extends Component {
   }
 
   getOpponentPlayer = () => {
-    const game = this.props.games[0];
+    const game = this.getGame();
     if (game.player1Id === this.props.user._id) {
       // Current user is player1, player2 is opponent.
       return {
