@@ -10,7 +10,8 @@ class PlaceBet extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ bet: event.target.value });
+    // we need to convert the number from a string first
+    this.setState({ bet: parseInt(event.target.value, 10) });
   }
 
   handleSubmit = (event) => {
