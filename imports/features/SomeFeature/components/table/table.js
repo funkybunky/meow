@@ -57,6 +57,10 @@ class Table extends Component {
     return true;
   }
 
+  handlePlaceBet = (bet) => {
+    console.log('bet: ', bet);
+  }
+
   _addProps = (element) => React.cloneElement(element, {
     games: this.props.games,
     user: this.props.user,

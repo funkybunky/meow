@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class PlaceBet extends Component {
+class PlaceBet extends Component {
   constructor(props) {
     super(props);
     this.state = { bet: 0 };
@@ -14,8 +14,8 @@ export default class PlaceBet extends Component {
   }
 
   handleSubmit = (event) => {
-    alert(`A bet was submitted: ${this.state.bet}`);
     event.preventDefault();
+    this.props.handleSubmit(this.state.bet);
   }
 
   render() {
@@ -32,3 +32,10 @@ export default class PlaceBet extends Component {
     );
   }
 }
+
+PlaceBet.propTypes = {
+  stack: React.PropTypes.number, // to determine max bet
+  handleSubmit: React.PropTypes.func, // callback to method
+};
+
+export default PlaceBet;
