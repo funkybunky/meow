@@ -166,9 +166,12 @@ export const placeBet = new ValidatedMethod({
 
     // ob es schon eine bet gab 1. von diesem aktuellen spieler
     // und vom anderen spieler, und diese danach löschen
+
+    // TODO: remove this
     if (Bets.find().count() > 1) {
       Bets.remove({});
     }
+
     const existingBet = Bets.findOne({ gameId });
     console.log('existing bets: ', Bets.find().count());
     console.log('existingBet: ', existingBet);
