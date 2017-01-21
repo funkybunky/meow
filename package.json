@@ -16,6 +16,7 @@
   "author": "Marcus Kleppe",
   "private": true,
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "bootstrap": "^3.3.7",
     "immutable": "^3.8.1",
     "jquery": "^2.2.4",
