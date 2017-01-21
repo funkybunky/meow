@@ -74,9 +74,9 @@ class Table extends Component {
           <p>Your stack: {this.getUserPlayer().balance}</p>
           {this.isOpponentLive()
             ? <div>
-                <h3>Opponent: {this.getOpponentPlayer().name}</h3>
-                <p>stack: {this.getOpponentPlayer().balance} </p>
-              </div>
+              <h3>Opponent: {this.getOpponentPlayer().name}</h3>
+              <p>stack: {this.getOpponentPlayer().balance} </p>
+            </div>
             : <div>Waiting for your opponent</div>
           }
           {React.Children.map(this.props.children, this._addProps)}
