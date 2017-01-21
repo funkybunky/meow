@@ -1,5 +1,6 @@
 /* global Meteor */
 import { Games, Game } from 'imports/collections/games.js';
+import { Bets, Bet } from 'imports/collections/bets.js';
 // import { Users } from 'imports/collections/users.js';
 import { check } from 'meteor/check';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -107,6 +108,82 @@ export const deleteAllGames = new ValidatedMethod({
     Games.remove({});
     console.log('removed all games. current number of games: ',
     Games.find({}).count());
+    return true;
+  },
+});
+
+export const placeBet = new ValidatedMethod({
+  name: 'placeBet',
+
+  validate(args) {
+    check(args, {
+      gameId: String,
+      bet: Number,
+    });
+  },
+
+  run({ bet, gameId }) {
+    console.log('Executing on client?', this.isSimulation);
+    console.log('Got bet and game id:', bet, gameId);
+    const userId = this.userId;
+    const game = Game.findOne(gameId);
+
+    // game holen um zu sehen, ob der spieler im game ist
+    if (game.player1Id !== userId && game.player2Id !== userId) {
+      throw new Meteor.Error('you are not in the game, man!');
+    }
+
+    // find out if user is player1 or player2
+    let player,
+      opp;
+    if (game.player1Id === userId) {
+      player = {
+        _id: userId,
+        balance: game.player1Balance,
+      };
+      opp = {
+        _id: game.player2Id,
+        balance: game.player2Balance,
+        name: game.player2Name,
+      };
+    } else {
+      player = {
+        _id: userId,
+        balance: game.player2Balance,
+      };
+      opp = {
+        _id: game.player1Id,
+        balance: game.player1Balance,
+        name: game.player1Name,
+      };
+    }
+
+    // prüfen, ob bet kleiner als stack ist und größergleich Null
+    if (bet < 0 || bet > player.balance) {
+      throw new Meteor.Error('you cannot bet less than zero or more than you actually got, bitch');
+    }
+
+    // ob es schon eine bet gab 1. von diesem aktuellen spieler
+    // und vom anderen spieler, und diese danach löschen
+    const existingBet = Bet.findOne(gameId);
+    console.log('existingBet: ', existingBet);
+    if (!existingBet) {
+      // The current player nor the opponent has already placed a bet
+      // bet in die bets collection schreiben
+      const newBet = new Bet({
+        playerId: userId,
+        bet,
+        gameId,
+      });
+      newBet.save();
+    } else if (existingBet.playerId === opp._id) {
+      // opponent has already placed a bet
+      // nun dessen bet aus der bets collection lesen und gewinner bestimmen
+    } else if (existingBet.playerId === userId) {
+      // current player has aleady placed a bet
+      console.log('aleady placed a bet');
+    }
+
     return true;
   },
 });

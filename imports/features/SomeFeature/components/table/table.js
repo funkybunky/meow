@@ -59,6 +59,13 @@ class Table extends Component {
 
   handlePlaceBet = (bet) => {
     console.log('bet: ', bet);
+    // Meteor.call('placeBet', {
+    this.props.placeBet.call({
+      bet,
+      gameId: this.getGame()._id,
+    }, (err, res) => {
+      console.log('place bet executed. err, res: ', err, res);
+    });
   }
 
   _addProps = (element) => React.cloneElement(element, {
@@ -113,6 +120,7 @@ Table.propTypes = {
   // subscription is ready, so on first render it won't be defined
   children: React.PropTypes.element,
   user: React.PropTypes.object,
+  placeBet: React.PropTypes.object, // server methods are objects
 };
 
 export default Radium(Table);
