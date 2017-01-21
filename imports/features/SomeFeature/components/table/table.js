@@ -2,16 +2,9 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 
+import PlaceBet from './place_bet.js';
+
 class Table extends Component {
-
-  state = {
-    hasJoinedGame: false,
-  };
-
-  _addProps = (element) => React.cloneElement(element, {
-    games: this.props.games,
-    user: this.props.user,
-  })
 
   getGame = () => {
     if (!this.props.games[0]) {
@@ -64,6 +57,11 @@ class Table extends Component {
     return true;
   }
 
+  _addProps = (element) => React.cloneElement(element, {
+    games: this.props.games,
+    user: this.props.user,
+  })
+
   render() {
     return (
       <div>
@@ -80,6 +78,10 @@ class Table extends Component {
             </div>
             : <div>Waiting for your opponent</div>
           }
+          <PlaceBet
+            stack={this.getUserPlayer().balance}
+            handleSubmit={this.handlePlaceBet}
+          />
           {React.Children.map(this.props.children, this._addProps)}
         </div>
       : <div>Loading</div>
