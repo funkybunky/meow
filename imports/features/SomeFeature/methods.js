@@ -126,7 +126,8 @@ export const placeBet = new ValidatedMethod({
     console.log('Executing on client?', this.isSimulation);
     console.log('Got bet and game id:', bet, gameId);
     const userId = this.userId;
-    const game = Game.findOne(gameId);
+    const game = Games.findOne(gameId);
+    console.log('game: ', JSON.stringify(game, null, 2));
 
     // game holen um zu sehen, ob der spieler im game ist
     if (game.player1Id !== userId && game.player2Id !== userId) {
@@ -165,17 +166,27 @@ export const placeBet = new ValidatedMethod({
 
     // ob es schon eine bet gab 1. von diesem aktuellen spieler
     // und vom anderen spieler, und diese danach löschen
-    const existingBet = Bet.findOne(gameId);
+    if (Bets.find().count() > 1) {
+      Bets.remove({});
+    }
+    const existingBet = Bets.findOne({ gameId });
+    console.log('existing bets: ', Bets.find().count());
     console.log('existingBet: ', existingBet);
     if (!existingBet) {
       // The current player nor the opponent has already placed a bet
       // bet in die bets collection schreiben
-      const newBet = new Bet({
+      // const newBet = new Bet({
+      //   playerId: userId,
+      //   bet,
+      //   gameId,
+      // });
+      // newBet.save();
+      Bets.insert({
         playerId: userId,
         bet,
         gameId,
       });
-      newBet.save();
+      console.log('new bet created');
     } else if (existingBet.playerId === opp._id) {
       // opponent has already placed a bet
       // nun dessen bet aus der bets collection lesen und gewinner bestimmen
