@@ -70,6 +70,7 @@ class Table extends Component {
       {this.props.ready
         ? <div style={styles.root}> {/* TODO: add a new check here whether game exists, if not show some user feedback, but not important for now */}
           <h2>Table</h2>
+          <p>Blinds: {this.getGame().blind}</p>
           <h3>You: {this.props.user.username}</h3>
           <p>Your stack: {this.getUserPlayer().balance}</p>
           {this.isOpponentLive()
