@@ -23,8 +23,15 @@ class PlaceBet extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Your bet:
-            <input type="text" value={this.state.bet} onChange={this.handleChange} />
+            Your bet: {this.state.bet}
+            <input
+              type="range"
+              min="0"
+              max={this.props.stack}
+              step="1"
+              value={this.state.bet}
+              onChange={this.handleChange}
+            />
           </label>
           <input type="submit" value="Place bet" />
         </form>
