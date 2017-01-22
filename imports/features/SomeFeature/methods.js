@@ -126,7 +126,7 @@ export const placeBet = new ValidatedMethod({
     console.log('Executing on client?', this.isSimulation);
     console.log('Got bet and game id:', bet, gameId);
     const userId = this.userId;
-    const game = Games.findOne(gameId);
+    const game = Game.findOne(gameId);
     console.log('game: ', JSON.stringify(game, null, 2));
 
     // game holen um zu sehen, ob der spieler im game ist
