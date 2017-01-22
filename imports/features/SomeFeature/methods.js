@@ -135,10 +135,11 @@ export const placeBet = new ValidatedMethod({
     }
 
     // find out if user is player1 or player2
-    let player,
-      opp;
+    let user,
+      opp,
+      userIsPlayer1;
     if (game.player1Id === userId) {
-      player = {
+      user = {
         _id: userId,
         balance: game.player1Balance,
       };
@@ -147,8 +148,9 @@ export const placeBet = new ValidatedMethod({
         balance: game.player2Balance,
         name: game.player2Name,
       };
+      userIsPlayer1 = true;
     } else {
-      player = {
+      user = {
         _id: userId,
         balance: game.player2Balance,
       };
@@ -157,10 +159,11 @@ export const placeBet = new ValidatedMethod({
         balance: game.player1Balance,
         name: game.player1Name,
       };
+      userIsPlayer1 = false;
     }
 
     // prüfen, ob bet kleiner als stack ist und größergleich Null
-    if (bet < 0 || bet > player.balance) {
+    if (bet < 0 || bet > user.balance) {
       throw new Meteor.Error('you cannot bet less than zero or more than you actually got, bitch');
     }
 
@@ -176,7 +179,7 @@ export const placeBet = new ValidatedMethod({
     console.log('existing bets: ', Bets.find().count());
     console.log('existingBet: ', existingBet);
     if (!existingBet) {
-      // The current player nor the opponent has already placed a bet
+      // The current user nor the opponent has already placed a bet
       // bet in die bets collection schreiben
       // const newBet = new Bet({
       //   playerId: userId,
@@ -189,12 +192,62 @@ export const placeBet = new ValidatedMethod({
         bet,
         gameId,
       });
+      if (userIsPlayer1) {
+        game.player1Balance -= bet;
+      } else {
+        game.player2Balance -= bet;
+      }
+      game.save();
       console.log('new bet created');
     } else if (existingBet.playerId === opp._id) {
       // opponent has already placed a bet
+      // delete current bet in DB
+      Bets.remove(existingBet._id);
+
+      // subtract bet from stack first, then calculate winner
+      if (userIsPlayer1) {
+        game.player1Balance -= bet;
+      } else {
+        game.player2Balance -= bet;
+      }
+      game.save();
+
       // nun dessen bet aus der bets collection lesen und gewinner bestimmen
+      const oppBet = existingBet.bet;
+      const userBet = bet;
+      // calculate winner
+      let newStackUser;
+      let newStackOpp;
+
+      if (oppBet > userBet) {
+        // opp gewinnt und bekommt pot, also die blinds und die bet des Gegners
+        // und seine eigene Bet wird noch abgezogen; Nein, da sie bereits
+        // abgezogen wurde beim Setzen
+        newStackOpp = opp.balance + (2 * game.blind) + userBet;
+        newStackUser = user.balance + oppBet;
+      } else if (userBet > oppBet) {
+        // user gewinnt und bekommt blinds
+        newStackOpp = opp.balance + userBet;
+        newStackUser = user.balance + (2 * game.blind) + oppBet;
+      } else {
+        // wenn beide das gleiche gesetzt haben, bekommen beide ihre Einsätze
+        // zurück und ihren gesetzten blind
+        newStackOpp = opp.balance + game.blind;
+        newStackUser = user.balance + game.blind;
+      }
+      // save the new stacks to DB
+      if (userIsPlayer1) {
+        game.player1Balance = newStackUser;
+        game.player2Balance = newStackOpp;
+      } else {
+        game.player1Balance = newStackOpp;
+        game.player2Balance = newStackUser;
+      }
+      game.save();
+      console.log('the game after all the betting: ',
+        JSON.stringify(game, null, 2));
     } else if (existingBet.playerId === userId) {
-      // current player has aleady placed a bet
+      // current user has aleady placed a bet
       console.log('aleady placed a bet');
     }
 
