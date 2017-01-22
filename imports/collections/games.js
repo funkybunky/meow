@@ -43,7 +43,7 @@ export const Game = Class.create({
     },
     blind: {
       type: Number,
-      label: '',
+      label: 'Mandatory Einsatz that every player has to pay to participate',
     },
     player1Bet: {
       type: Number,
