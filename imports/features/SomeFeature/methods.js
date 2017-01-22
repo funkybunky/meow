@@ -167,6 +167,12 @@ export const placeBet = new ValidatedMethod({
       throw new Meteor.Error('you cannot bet less than zero or more than you actually got, bitch');
     }
 
+    // if we are on the client, exist execution here, because bets are stored on
+    // the server only
+    if (this.isSimulation) {
+      return true;
+    }
+
     // ob es schon eine bet gab 1. von diesem aktuellen spieler
     // und vom anderen spieler, und diese danach löschen
 
@@ -175,6 +181,7 @@ export const placeBet = new ValidatedMethod({
       Bets.remove({});
     }
 
+    // {gameId} is ES6 short notation for { gameId: gameId }
     const existingBet = Bets.findOne({ gameId });
     console.log('existing bets: ', Bets.find().count());
     console.log('existingBet: ', existingBet);
@@ -244,12 +251,13 @@ export const placeBet = new ValidatedMethod({
         game.player2Balance = newStackUser;
       }
       game.save();
-      console.log('the game after all the betting: ',
-        JSON.stringify(game, null, 2));
     } else if (existingBet.playerId === userId) {
       // current user has aleady placed a bet
       console.log('aleady placed a bet');
     }
+
+    console.log('the game after all the betting: ',
+      JSON.stringify(game, null, 2));
 
     return true;
   },
