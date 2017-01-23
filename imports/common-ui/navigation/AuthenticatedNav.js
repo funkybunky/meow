@@ -22,7 +22,7 @@ export const AuthenticatedNav = () => (
         <NavItem eventKey={2} href="/test">Test</NavItem>
       </LinkContainer>
       <LinkContainer to="/table">
-        <NavItem eventKey={2} href="/table">Table</NavItem>
+        <NavItem eventKey={3} href="/table">Table</NavItem>
       </LinkContainer>
     </Nav>
     <Nav pullRight>
