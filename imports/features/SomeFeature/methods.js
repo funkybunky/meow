@@ -120,7 +120,7 @@ export const deleteAllBets = new ValidatedMethod({
 
   run() {
     Bets.remove({});
-    console.log('removed all games. current number of games: ',
+    console.log('removed all bets. current number of bets: ',
     Bets.find({}).count());
     return true;
   },
