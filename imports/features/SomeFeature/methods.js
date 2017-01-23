@@ -112,6 +112,20 @@ export const deleteAllGames = new ValidatedMethod({
   },
 });
 
+export const deleteAllBets = new ValidatedMethod({
+  name: 'deleteAllBets',
+
+  validate() {
+  },
+
+  run() {
+    Bets.remove({});
+    console.log('removed all games. current number of games: ',
+    Bets.find({}).count());
+    return true;
+  },
+});
+
 export const placeBet = new ValidatedMethod({
   name: 'placeBet',
 
