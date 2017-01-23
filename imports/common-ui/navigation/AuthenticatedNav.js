@@ -21,6 +21,9 @@ export const AuthenticatedNav = () => (
       <LinkContainer to="/test">
         <NavItem eventKey={2} href="/test">Test</NavItem>
       </LinkContainer>
+      <LinkContainer to="/table">
+        <NavItem eventKey={2} href="/table">Table</NavItem>
+      </LinkContainer>
     </Nav>
     <Nav pullRight>
       <NavDropdown eventKey={3} title={userName()} id="basic-nav-dropdown">
