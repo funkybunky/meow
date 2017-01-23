@@ -15,7 +15,7 @@ class Table extends Component {
 
   getUserPlayer = () => {
     const game = this.getGame();
-    if (game.player1Id !== this.props.user._id) {
+    if (game.player1Id === this.props.user._id) {
       // Current user is player1.
       return {
         _id: game.player1Id,
@@ -80,7 +80,7 @@ class Table extends Component {
         ? <div style={styles.root}> {/* TODO: add a new check here whether game exists, if not show some user feedback, but not important for now */}
           <h2>Table</h2>
           <p>Blinds: {this.getGame().blind}</p>
-          <h3>You: {this.props.user.username}</h3>
+          <h3>You: {this.getUserPlayer().name}</h3>
           <p>Your stack: {this.getUserPlayer().balance}</p>
           {this.isOpponentLive()
             ? <div>
